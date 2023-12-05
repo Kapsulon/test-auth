@@ -1,15 +1,15 @@
 <script lang="ts">
-    import { signIn } from "@auth/sveltekit/client"
+    import { signIn, signOut } from "@auth/sveltekit/client"
 
-    let email: string = "";
-    let password: string = "";
+	export let data: any;
 </script>
 
-<label for="email">Email:</label>
-<input type="email" id="email" bind:value={email} />
-<label for="password">Password:</label>
-<input type="password" id="password" bind:value={password} />
 <button on:click={() => {signIn("credentials", {
-    email,
-    password
-})}}>login</button>
+    "email": "",
+    "password": ""
+})}}>Sign In</button>
+
+{#if data.expires}
+    <p>Logged in</p>
+    <button on:click={() => {signOut()}}>Sign Out</button>
+{/if}
